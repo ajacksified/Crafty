@@ -1,4 +1,5 @@
-/*!
+/
+  !
 * Crafty v0.4.3
 * http://craftyjs.com
 *
@@ -2955,7 +2956,7 @@ Crafty.extend({
 			return {_x: -this._x, _y: -this._y, _w: this.width, _h: this.height};
 		},
 		
-		init: function(w,h) {
+		init: function(w,h, el) {
 			Crafty.DOM.window.init();
 			
 			//fullscreen if mobile or not specified
@@ -2963,7 +2964,7 @@ Crafty.extend({
 			this.height = (!h || Crafty.mobile) ? Crafty.DOM.window.height : h;
 			
 			//check if stage exists
-			var crstage = document.getElementById("cr-stage");
+			var crstage = (el? el : document.getElementById("cr-stage"));
 			
 			//create stage div to contain everything
 			Crafty.stage = {
@@ -3666,8 +3667,8 @@ Crafty.extend({
 
 //initialize the input events onload
 Crafty.bind("Load", function() {
-	Crafty.addEvent(this, "keydown", Crafty.keyboardDispatch);
-	Crafty.addEvent(this, "keyup", Crafty.keyboardDispatch);
+	Crafty.addEvent(this, Crafty.stage.elem, "keydown", Crafty.keyboardDispatch);
+	Crafty.addEvent(this, Crafty.stage.elem, "keyup", Crafty.keyboardDispatch);
         
 	Crafty.addEvent(this, Crafty.stage.elem, "mousedown", Crafty.mouseDispatch);
 	Crafty.addEvent(this, Crafty.stage.elem, "mouseup", Crafty.mouseDispatch);
